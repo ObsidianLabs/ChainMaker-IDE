@@ -137,7 +137,8 @@
   "workspaces": [
     "../electron-components/packages/*",
     "../eth-components/packages/*",
-    "../chainmaker-components/packages/*"
+    "../chainmaker-components/packages/*",
+    "../chainmaker-sdk"
   ],
   "browserslist": [
     ">0.2%",

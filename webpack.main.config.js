@@ -61,6 +61,10 @@ module.exports = merge.smart(baseConfig, {
         to: 'genesis.json',
       },
       {
+        from: 'node_modules/@obsidians/chainmaker-network/main/nodeconfig',
+        to: 'nodeconfig',
+      },
+      {
         from: 'assets/icon.png',
         to: 'icon.png',
       },
@@ -84,7 +88,7 @@ module.exports = merge.smart(baseConfig, {
       'process.env.SERVER_URL': JSON.stringify(
         process.env.REACT_APP_SERVER_URL
       ),
-      'process.env.DOCKER_IMAGE_NODE': '"ethereum/client-go"',
+      'process.env.DOCKER_IMAGE_NODE': '"chainmakerofficial/chainmaker"',
       'process.env.DOCKER_IMAGE_COMPILER': '"obsidians/truffle"',
     }),
   ],
