@@ -90,7 +90,7 @@ const overrides = [
     '@solidity-parser/parser': '@solidity-parser/parser/dist/index.cjs.js',
     '@': path.resolve(__dirname, 'src/lib'),
     '@obsidians/welcome': `@obsidians/${process.env.PROJECT}-welcome`,
-    '@obsidians/header': `@obsidians/${process.env.BUILD}-header`,
+    '@obsidians/header': `@obsidians/${process.env.PROJECT}-header`,
     '@obsidians/bottombar': `@obsidians/${process.env.BUILD}-bottombar`,
     '@obsidians/compiler': `@obsidians/${process.env.BUILD}-compiler`,
     '@obsidians/project': `@obsidians/${process.env.BUILD}-project`,
