@@ -5,7 +5,7 @@ const { AutoUpdate } = require('@obsidians/global');
 const CompilerManager = require('@obsidians/eth-compiler');
 const { InstanceManager } = require('@obsidians/chainmaker-network');
 const ProjectChannel = require('@obsidians/eth-project');
-const { SdkChannel } = require('@obsidians/eth-sdk');
+const { SdkChannel } = require('@obsidians/chainmaker-sdk');
 const AuthChannel = require('@obsidians/auth');
 
 let ipcChannel,
