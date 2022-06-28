@@ -89,7 +89,8 @@ module.exports = merge.smart(baseConfig, {
         process.env.REACT_APP_SERVER_URL
       ),
       'process.env.DOCKER_IMAGE_NODE': '"chainmakerofficial/chainmaker"',
-      'process.env.DOCKER_IMAGE_COMPILER': '"obsidians/truffle"',
+      'process.env.DOCKER_IMAGE_COMPILER':
+        '"chainmakerofficial/chainmaker-solidity-contract"',
     }),
   ],
 });
