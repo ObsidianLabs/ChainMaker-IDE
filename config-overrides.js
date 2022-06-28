@@ -95,7 +95,7 @@ const overrides = [
     '@obsidians/compiler': `@obsidians/${process.env.BUILD}-compiler`,
     '@obsidians/project': `@obsidians/${process.env.BUILD}-project`,
     '@obsidians/contract': `@obsidians/${process.env.BUILD}-contract`,
-    '@obsidians/explorer': `@obsidians/${process.env.BUILD}-explorer`,
+    '@obsidians/explorer': `@obsidians/${process.env.PROJECT}-explorer`,
     '@obsidians/network': `@obsidians/${process.env.PROJECT}-network`,
     '@obsidians/node': `@obsidians/${process.env.PROJECT}-node`,
     '@obsidians/sdk': `@obsidians/${process.env.PROJECT}-sdk`,
