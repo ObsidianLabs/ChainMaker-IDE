@@ -1,10 +1,10 @@
-const os = require('os')
-const { app, Menu, shell, dialog } = require('electron')
-const path = require('path')
-const isDev = require('electron-is-dev')
-const ipc = require('./ipc')
+const os = require('os');
+const { app, Menu, shell, dialog } = require('electron');
+const path = require('path');
+const isDev = require('electron-is-dev');
+const ipc = require('./ipc');
 
-module.exports = function createMenu () {
+module.exports = function createMenu() {
   const application = {
     label: 'Application',
     submenu: [
@@ -18,22 +18,27 @@ module.exports = function createMenu () {
             buttons: ['Confirm', 'Cancel'],
             defaultId: 1,
             message: 'All your data will be lost. Are you sure to continue?',
-            cancelId: 1
-          })
-          if (response === 0) { // confirm
-            const window = ipc.getWindow()
+            cancelId: 1,
+          });
+          if (response === 0) {
+            // confirm
+            const window = ipc.getWindow();
             if (window) {
-              const session = window.webContents.session
-              await session.clearStorageData()
-              window.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../../build/index.html')}`)
+              const session = window.webContents.session;
+              await session.clearStorageData();
+              window.loadURL(
+                isDev
+                  ? 'http://localhost:3000'
+                  : `file://${path.join(__dirname, '../../build/index.html')}`
+              );
             }
           }
-        }
+        },
       },
       { type: 'separator' },
-      { label: 'Quit', accelerator: 'Command+Q', click: () => app.quit() }
-    ]
-  }
+      { label: 'Quit', accelerator: 'Command+Q', click: () => app.quit() },
+    ],
+  };
 
   const file = {
     label: 'File',
@@ -41,37 +46,37 @@ module.exports = function createMenu () {
       {
         label: 'New Project...',
         accelerator: 'CmdOrCtrl+Shift+N',
-        click: () => ipc.send('menu-click', 'project.newProject')
+        click: () => ipc.send('menu-click', 'project.newProject'),
       },
       {
         label: 'Open Project...',
         accelerator: 'CmdOrCtrl+Shift+O',
-        click: () => ipc.send('menu-click', 'project.openProject')
+        click: () => ipc.send('menu-click', 'project.openProject'),
       },
       { type: 'separator' },
       {
         label: 'New File...',
         accelerator: 'CmdOrCtrl+N',
-        click: () => ipc.send('menu-click', 'project.newFile')
+        click: () => ipc.send('menu-click', 'project.newFile'),
       },
       {
         label: 'New Folder...',
         accelerator: 'CmdOrCtrl+Option+N',
-        click: () => ipc.send('menu-click', 'project.newFolder')
+        click: () => ipc.send('menu-click', 'project.newFolder'),
       },
       { type: 'separator' },
       {
         label: 'Save',
         accelerator: 'CmdOrCtrl+S',
-        click: () => ipc.send('menu-click', 'project.save')
+        click: () => ipc.send('menu-click', 'project.save'),
       },
       {
         label: 'Save All',
         accelerator: 'CmdOrCtrl+Option+S',
-        click: () => ipc.send('menu-click', 'project.saveAll')
-      }
-    ]
-  }
+        click: () => ipc.send('menu-click', 'project.saveAll'),
+      },
+    ],
+  };
 
   const edit = {
     label: 'Edit',
@@ -79,12 +84,12 @@ module.exports = function createMenu () {
       {
         label: 'Undo',
         accelerator: 'CmdOrCtrl+Z',
-        click: () => ipc.send('menu-click', 'project.undo')
+        click: () => ipc.send('menu-click', 'project.undo'),
       },
       {
         label: 'Redo',
         accelerator: 'CmdOrCtrl+Shift+Z',
-        click: () => ipc.send('menu-click', 'project.redo')
+        click: () => ipc.send('menu-click', 'project.redo'),
       },
       { type: 'separator' },
       { role: 'cut' },
@@ -92,50 +97,47 @@ module.exports = function createMenu () {
       { role: 'paste' },
       {
         label: 'Delete',
-        click: () => ipc.send('menu-click', 'project.delete')
+        click: () => ipc.send('menu-click', 'project.delete'),
       },
       {
         label: 'Select All',
         accelerator: 'CmdOrCtrl+A',
-        click: () => ipc.send('menu-click', 'project.selectAll')
-      }
-    ]
-  }
+        click: () => ipc.send('menu-click', 'project.selectAll'),
+      },
+    ],
+  };
 
   const view = {
     label: 'View',
     submenu: [
-      { label: 'Open Console', accelerator: 'Ctrl+`', click: () => ipc.send('menu-click', 'project.openTerminal') },
+      {
+        label: 'Open Console',
+        accelerator: 'Ctrl+`',
+        click: () => ipc.send('menu-click', 'project.openTerminal'),
+      },
       { type: 'separator' },
       { label: 'Increase Font Size', role: 'zoomin' },
       { label: 'Decrease Font Size', role: 'zoomout' },
-      { label: 'Reset to Actual Size', role: 'resetzoom' }
-    ]
-  }
-
+      { label: 'Reset to Actual Size', role: 'resetzoom' },
+    ],
+  };
 
   const debug = {
     label: 'Debug',
-    submenu: [
-      { role: 'reload' },
-      { role: 'toggledevtools' }
-    ]
-  }
+    submenu: [{ role: 'reload' }, { role: 'toggledevtools' }],
+  };
 
-  const template = [
-    file,
-    edit,
-    view,
-  ]
+  const template = [file, edit, view];
 
   if (os.type() === 'Darwin') {
-    template.unshift(application)
+    template.unshift(application);
   } else {
-    template.push(application)
+    template.push(application);
   }
 
   // template.push(debug)
-  (isDev || process.env.REACT_APP_ENV === 'development') && template.push(debug)
+  (isDev || process.env.REACT_APP_ENV === 'development') &&
+    template.push(debug);
 
-  Menu.setApplicationMenu(Menu.buildFromTemplate(template))
-}
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+};

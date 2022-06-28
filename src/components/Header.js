@@ -2,18 +2,18 @@ import React, { PureComponent } from 'react';
 import headerActions, { AuthModal, Header, NavGuard } from '@obsidians/header';
 
 import { BaseProjectManager } from '@obsidians/workspace';
-import EthSdk from '@obsidians/eth-sdk';
 import { IpcChannel } from '@obsidians/ipc';
 import { List } from 'immutable';
 import { actions } from '@obsidians/workspace';
+import chainmakerSDK from '@obsidians/chainmaker-sdk';
 import { connect } from '@obsidians/redux';
 import { createProject } from '../lib/bsn';
 import keypairManager from '@obsidians/keypair';
 import { networkManager } from '@obsidians/network';
 
-keypairManager.kp = EthSdk.kp;
-networkManager.addSdk(EthSdk, EthSdk.networks);
-networkManager.addSdk(EthSdk, EthSdk.customNetworks);
+keypairManager.kp = chainmakerSDK.kp;
+networkManager.addSdk(chainmakerSDK, chainmakerSDK.networks);
+networkManager.addSdk(chainmakerSDK, chainmakerSDK.customNetworks);
 
 class HeaderWithRedux extends PureComponent {
   state = {
@@ -28,28 +28,19 @@ class HeaderWithRedux extends PureComponent {
   }
 
   async refresh() {
-    if (process.env.DEPLOY === 'bsn') {
-      networkManager.networks = [];
-      this.getNetworks();
-      clearInterval(this.state.interval);
-      const interval = setInterval(() => this.getNetworks(), 30 * 1000);
-      this.setState({ interval });
-    } else {
-      const customeNetworkMap = this.props.customNetworks.toJS();
-      const customeNetworkGroup = Object.keys(customeNetworkMap)
-        .map((name) => ({
-          group: 'others',
-          icon: 'fas fa-vial',
-          id: name,
-          name: name,
-          fullName: name,
-          notification: `Switched to <b>${name}</b>.`,
-          url: customeNetworkMap[name].url,
-        }))
-        .sort((a, b) => a.name.localeCompare(b.name));
-
-      networkManager.addSdk(EthSdk, customeNetworkGroup);
-    }
+    const customeNetworkMap = this.props.customNetworks.toJS();
+    const customeNetworkGroup = Object.keys(customeNetworkMap)
+      .map((name) => ({
+        group: 'others',
+        icon: 'fas fa-vial',
+        id: name,
+        name: name,
+        fullName: name,
+        notification: `Switched to <b>${name}</b>.`,
+        url: customeNetworkMap[name].url,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+    networkManager.addSdk(chainmakerSDK, customeNetworkGroup);
   }
 
   async getNetworks() {
@@ -75,7 +66,7 @@ class HeaderWithRedux extends PureComponent {
           raw: project,
         };
       });
-      networkManager.addSdk(EthSdk, remoteNetworks);
+      networkManager.addSdk(chainmakerSDK, remoteNetworks);
       this.setNetwork({ redirect: false, notify: false });
     } catch (error) {
       networkManager.networks = [];
@@ -129,6 +120,7 @@ class HeaderWithRedux extends PureComponent {
           <img
             src={require(process.env.REACT_APP_LOGO).default}
             style={{ background: 'transparent', height: '100%' }}
+            alt="logo"
           />
         </div>
       );
@@ -147,7 +139,6 @@ class HeaderWithRedux extends PureComponent {
     const groupedNetworks = this.groupedNetworks(networkGroups);
     const selectedNetwork = networkList.find((n) => n.id === network) || {};
 
-    const browserAccounts = uiState.get('browserAccounts') || [];
     const starred = accounts.getIn([network, 'accounts'])?.toJS() || [];
     const starredContracts =
       contracts.getIn([network, 'starred'])?.toJS() || [];
@@ -163,7 +154,6 @@ class HeaderWithRedux extends PureComponent {
         selectedAccount={selectedAccount}
         starred={starred}
         starredContracts={starredContracts}
-        browserAccounts={browserAccounts}
         network={selectedNetwork}
         networkList={groupedNetworks}
         AuthModal={AuthModal}
