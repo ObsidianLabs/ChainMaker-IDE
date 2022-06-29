@@ -91,7 +91,7 @@ const overrides = [
     '@': path.resolve(__dirname, 'src/lib'),
     '@obsidians/welcome': `@obsidians/${process.env.PROJECT}-welcome`,
     '@obsidians/header': `@obsidians/${process.env.PROJECT}-header`,
-    '@obsidians/bottombar': `@obsidians/${process.env.BUILD}-bottombar`,
+    '@obsidians/bottombar': `@obsidians/${process.env.PROJECT}-bottombar`,
     '@obsidians/compiler': `@obsidians/${process.env.PROJECT}-compiler`,
     '@obsidians/project': `@obsidians/${process.env.PROJECT}-project`,
     '@obsidians/contract': `@obsidians/${process.env.BUILD}-contract`,
