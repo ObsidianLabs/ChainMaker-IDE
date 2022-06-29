@@ -4,7 +4,7 @@ const KeypairManager = require('@obsidians/keypair');
 const { AutoUpdate } = require('@obsidians/global');
 const CompilerManager = require('@obsidians/eth-compiler');
 const { InstanceManager } = require('@obsidians/chainmaker-network');
-const ProjectChannel = require('@obsidians/eth-project');
+const ProjectChannel = require('@obsidians/chainmaker-project');
 const { SdkChannel } = require('@obsidians/chainmaker-sdk');
 const AuthChannel = require('@obsidians/auth');
 
