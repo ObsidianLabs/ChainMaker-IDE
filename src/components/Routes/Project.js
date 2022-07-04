@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import Project from '@obsidians/eth-project';
+import Project from '@obsidians/project';
 import { connect } from '@obsidians/redux';
 import platform from '@obsidians/platform';
 
