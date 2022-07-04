@@ -53,11 +53,11 @@ module.exports = merge.smart(baseConfig, {
   plugins: [
     new CopyPlugin([
       {
-        from: 'node_modules/@obsidians/eth-project/main/templates',
+        from: 'node_modules/@obsidians/chainmaker-project/main/templates',
         to: 'templates',
       },
       {
-        from: 'node_modules/@obsidians/eth-network/main/genesis.json',
+        from: 'node_modules/@obsidians/chainmaker-network/main/genesis.json',
         to: 'genesis.json',
       },
       {

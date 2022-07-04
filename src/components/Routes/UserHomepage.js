@@ -1,4 +1,4 @@
-import { BaseUserHomepage } from '@obsidians/user';
+import { BaseUserHomepage } from '../BasicHomePage';
 import { connect } from '@obsidians/redux';
 import { networkManager } from '@obsidians/network';
 
