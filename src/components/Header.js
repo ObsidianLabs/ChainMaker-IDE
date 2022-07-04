@@ -18,29 +18,38 @@ networkManager.addSdk(chainmakerSDK, chainmakerSDK.customNetworks);
 class HeaderWithRedux extends PureComponent {
   state = {
     interval: null,
+    customNetworkGroup: [],
   };
 
   componentDidMount() {
     actions.history = this.props.history;
     headerActions.history = this.props.history;
-    this.refresh();
     this.navGuard = new NavGuard(this.props.history);
   }
 
-  async refresh() {
+  async updateCustomNetwork() {
     const customeNetworkMap = this.props.customNetworks.toJS();
-    const customeNetworkGroup = Object.keys(customeNetworkMap)
-      .map((name) => ({
+    const mapKeys = Object.keys(customeNetworkMap);
+    const currentNetworkNames = networkManager.networks.map(
+      (item) => item.name
+    );
+
+    const filteredKeys = mapKeys.reduce((prev, cur) => {
+      if (!currentNetworkNames.includes(cur)) {
+        prev.push(cur);
+      }
+      return prev;
+    }, []);
+    if (!filteredKeys.length) return;
+    this.customNetworkGroup = filteredKeys
+      .map((keys) => ({
         group: 'others',
         icon: 'fas fa-vial',
-        id: name,
-        name: name,
-        fullName: name,
-        notification: `Switched to <b>${name}</b>.`,
-        url: customeNetworkMap[name].url,
+        id: 'custom',
+        ...customeNetworkMap[keys],
       }))
       .sort((a, b) => a.name.localeCompare(b.name));
-    networkManager.addSdk(chainmakerSDK, customeNetworkGroup);
+    networkManager.addSdk(chainmakerSDK, this.customNetworkGroup);
   }
 
   async getNetworks() {
@@ -129,7 +138,9 @@ class HeaderWithRedux extends PureComponent {
   }
 
   render() {
+    this.updateCustomNetwork();
     console.debug('[render] HeaderWithRedux');
+
     const { uiState, profile, projects, contracts, accounts, network } =
       this.props;
     const selectedProject = projects.get('selected')?.toJS() || {};
