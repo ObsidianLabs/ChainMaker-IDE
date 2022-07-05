@@ -146,8 +146,8 @@
     "not op_mini all"
   ],
   "build": {
-    "productName": "Chain IDE",
-    "artifactName": "Chain-IDE-${version}.${ext}",
+    "productName": "Chainmaker IDE",
+    "artifactName": "Chainmaker-IDE-${version}.${ext}",
     "files": [
       "build/**/*",
       "node_modules/**/*"
