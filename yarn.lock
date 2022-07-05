@@ -5188,6 +5188,21 @@ ccount@^1.0.0:
   resolved "https://registry.yarnpkg.com/ccount/-/ccount-1.1.0.tgz#246687debb6014735131be8abab2d93898f8d043"
   integrity sha512-vlNK021QdI7PNeiUh/lKkC/mNHHfV0m/Ad5JoI0TYtlBnJAslM/JIkm/tGC88bkLIwO6OQ5uV6ztS6kVAtCDlg==
 
+"chainmaker-sdk@git+ssh://git@github.com:ObsidianLabs/chainmaker-sdk.git":
+  version "2.0.0"
+  resolved "git+ssh://git@github.com:ObsidianLabs/chainmaker-sdk.git#466eab68286b771bf49580ce0cad083ebe5d9574"
+  dependencies:
+    "@babel/core" "^7.12.13"
+    "@grpc/grpc-js" "1.6.7"
+    crypto "^1.0.1"
+    google-protobuf "^3.6.1"
+    lodash "^4.17.21"
+    mysql "^2.18.1"
+    protobufjs "^6.11.2"
+    uuid "^8.3.2"
+    winston "^3.3.3"
+    yamljs "^0.3.0"
+
 chalk@2.4.2, chalk@^2.0.0, chalk@^2.1.0, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
