@@ -1,5 +1,5 @@
 {
-  "name": "black-ide",
+  "name": "chainmaker-ide",
   "description": "Graphic IDE for Ethereum smart contract development",
   "version": "0.18.0",
   "author": {
@@ -146,8 +146,8 @@
     "not op_mini all"
   ],
   "build": {
-    "productName": "Black IDE",
-    "artifactName": "Black-IDE-${version}.${ext}",
+    "productName": "Chainmaker IDE",
+    "artifactName": "Chainmaker-IDE-${version}.${ext}",
     "files": [
       "build/**/*",
       "node_modules/**/*"
