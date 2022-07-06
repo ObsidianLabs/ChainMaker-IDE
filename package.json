@@ -164,7 +164,7 @@
       "buildResources": "assets"
     },
     "mac": {
-      "appId": "com.obsidians.ethereumstudio",
+      "appId": "com.obsidians.chainmakeride",
       "category": "developer-tools",
       "target": {
         "target": "default",

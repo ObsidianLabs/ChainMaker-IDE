@@ -22,7 +22,7 @@ module.exports = function () {
   fileOpsChannel = new FileOpsChannel();
   keypairManager = new KeypairManager(process.env.PROJECT);
   autoUpdate = new AutoUpdate(
-    'https://app.obsidians.io/api/v1/check-update/eth/'
+    'https://app.obsidians.io/api/v1/check-update/chainmaker/'
   );
   compilerManager = new CompilerManager();
   instanceManager = new InstanceManager();
