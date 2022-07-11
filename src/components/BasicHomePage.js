@@ -29,7 +29,7 @@ const tutorialModalInfo = {
   header: 'Welcome to Chainmaker IDE',
   description: `Chainmaker IDE is a graphic IDE for developing smart contracts on the Ethereum blockchian. New here ? Don't worry.
   Here is an instruction for a quick scan and details of each features.`,
-  nextPage: `${PROJECT_GITHUB_REPO}/blob/master/README.md`,
+  // nextPage: `${PROJECT_GITHUB_REPO}/blob/master/README.md`,
 };
 
 class UserHomepage extends PureComponent {
@@ -182,7 +182,7 @@ class UserHomepage extends PureComponent {
           className="mb-0"
           options={[
             { key: 'local', text: 'Local', icon: 'far fa-desktop mr-1' },
-            { key: 'cloud', text: 'Cloud', icon: 'far fa-cloud mr-1' },
+            // { key: 'cloud', text: 'Cloud', icon: 'far fa-cloud mr-1' },
           ]}
           selected={this.state.remote ? 'cloud' : 'local'}
           onSelect={(key) => this.setState({ remote: key === 'cloud' })}
